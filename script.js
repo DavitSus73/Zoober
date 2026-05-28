@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger-menu');
     const navLinks = document.querySelector('.nav-links');
 
-    // დაამატე შემოწმება (if), რომ თუ ელემენტი არ არის, სკრიპტი არ გაიჭედოს
     if (burger && navLinks) {
         burger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
