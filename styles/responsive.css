@@ -1,0 +1,111 @@
+/* 
+@media (max-width: 420px) {
+    .search-bar { flex-direction: column; width: 90%; gap: 10px; }
+    .search-bar input { width: 100% !important; }
+    #product-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; position: absolute; top: 9rem; left: 0; width: 100%; background: var(--primary-color); flex-direction: column; padding: 2rem; }
+    .nav-links.active { display: flex !important; }
+}
+
+
+@media (max-width: 768px) {
+    .burger-menu { display: block !important; }
+    #product-grid { grid-template-columns: repeat(1, 1fr); }
+    .filter-container { flex-wrap: wrap; }
+}
+
+@media (min-width: 1024px) {
+    .burger-menu { display: none !important; }
+    .nav-links { display: flex !important; }
+    #product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+  */
+  /* --- საერთო სტილის პარამეტრები (Responsive-ისთვის) --- */
+
+/* მობილური (420px-მდე) - პატარა ეკრანები */
+@media (max-width: 420px) {
+    .burger-menu { display: block !important; }
+    .search-bar { 
+        flex-direction: column; 
+        width: 95%; 
+        gap: 1rem;
+        
+    }
+    .search-bar input { width: 100% !important; }
+    .sell-container {
+        padding: 2rem;
+    }
+    #product-grid { grid-template-columns: 1fr; }
+    
+    /* მობილური მენიუს სრულყოფა */
+    .nav-links { 
+        display: none;
+        position: absolute;
+        top: 100%;
+        background: var(--primary-color);
+        padding: 1rem;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .submit-btn {
+        padding: 12px; /* ღილაკს პატარა ეკრანზე ზომას ვუკლებთ */
+        font-size: 0.9rem;
+    }
+    
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        padding: 10px; /* input-ების შიდა სივრცე მცირდება */
+    }
+}
+    .nav-links.active { display: flex !important; }
+    .filter-container { flex-wrap: wrap; justify-content: center; }
+    
+
+/* პლანშეტი / საშუალო ეკრანები (421px - 1023px) */
+@media (min-width: 421px) and (max-width: 1023px) {
+    .burger-menu { display: block !important; }
+    .search-bar { 
+        width: 85%;
+        margin-top: 20px; 
+        gap: 10px; 
+    }
+    
+    .nav-links { 
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        background: var(--primary-color);
+        padding: 2rem;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav-links.active { display: flex !important; }
+    
+    #product-grid { grid-template-columns: repeat(2, 1fr); }
+    .filter-container { flex-wrap: wrap; justify-content: center; }
+    .sell-container { 
+        width: 85%; 
+        padding: 25px; 
+    }
+}
+
+/* დესკტოპი (1024px და მეტი) */
+@media (min-width: 1024px) {
+    .burger-menu { display: none !important; }
+    
+    .nav-links { 
+        display: flex !important; 
+        position: absolute;
+        background: transparent; 
+        padding: 0; 
+        justify-content: center; 
+        align-items: center;
+    }
+    
+    #product-grid { grid-template-columns: repeat(3, 1fr); }
+}

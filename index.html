@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoober | Premium Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
+</head>
+<body>
+
+   <header class="header">
+        <div class="hero-logo">Zoober</div>
+        <div class="burger-menu" id="burger-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+    </div>
+        <nav class="nav-links" id="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sell-item.html#order">Sell Item</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="contact.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <button class="cart-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+        </button>
+
+        <div id="cart-modal" class="hidden-cart">
+            <div class="cart-content">
+                <div class="cart-header">
+                    <h2>Your Cart</h2>
+                    <button id="close-cart" class="close-btn">&times;</button>
+                </div>
+                <ul id="cart-items-list">
+                    </ul>
+                <div class="cart-footer">
+                    <div class="total-price">Total: $0.00</div>
+                    <button id="pay-btn">Pay Now</button>
+                </div>
+            </div>
+        </div>
+   </header>
+
+   <main>
+    <section class="hero-section">
+        <h1>Buy & Sell Anything</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for products...">
+            <button>Search</button>
+        </div>
+    </section>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="images/2motionblur.webp" class="d-block w-100" alt="Special Offer">
+                <div class="carousel-caption">
+                    <h5>New Arrivals</h5>
+                    <p>Check out the latest products in our store.</p>
+                </div>
+            </div>
+             <div class="carousel-item">
+                <img src="images/tech.avif" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                    <h5>Cutting-Edge Tech</h5>
+                    <p>Latest smartphones, laptops, and premium accessories.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/furniture.png" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                    <h5>Interior Perfection</h5>
+                    <p>Premium furniture to elevate your living space.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/chocolatebackground.jpg" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                   <h5>Gourmet Chocolate</h5>
+                    <p>Indulge in our finest selection of artisanal chocolates.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/organicfood.avif" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                   <h5>Organic Delicacies</h5>
+                    <p>Premium, organic products delivered to your door.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/bathroom.jpg" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                    <h5>Modern Bath Elegance</h5>
+                    <p>Where sophisticated design meets ultimate comfort and relaxation.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/premiumcar.jpeg" class="d-block w-100" alt="Soon">
+                <div class="carousel-caption">
+                    <h5>Premium Cars</h5>
+                    <p>The best vehicles for the best prices.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/real-estate.jpg" class="d-block w-100" alt="real-estate">
+                <div class="carousel-caption">
+                    <h5>Exclusive Real Estate</h5>
+                    <p>Find your dream home with our luxury listings.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    <div class="filter-container">
+    <button class="filter-btn" data-category="All" onclick="filterProducts('All', event)">All</button>
+    <button class="filter-btn" data-category="Accessories" onclick="filterProducts('Accessories', event)">Accessories</button>
+    <button class="filter-btn" data-category="Kitchen" onclick="filterProducts('Kitchen', event)">Kitchen</button>
+    <button class="filter-btn" data-category="Phones" onclick="filterProducts('Phones', event)">Phones</button>
+    <button class="filter-btn" data-category="Laptops" onclick="filterProducts('Laptops', event)">Laptops</button>
+    <button class="filter-btn" data-category="PC" onclick="filterProducts('PC', event)">PC</button>
+    <button class="filter-btn" data-category="Furniture" onclick="filterProducts('Furniture', event)">Furniture</button>
+    <button class="filter-btn" data-category="Bathroom" onclick="filterProducts('Bathroom', event)">Bathroom</button>
+    <button class="filter-btn" data-category="Chocolate" onclick="filterProducts('Chocolate', event)">Chocolate</button>
+    <button class="filter-btn" data-category="Food" onclick="filterProducts('Food', event)">Food</button>
+    <button class="filter-btn" data-category="Jewelry" onclick="filterProducts('Jewelry', event)">Jewelry</button>
+    <button class="filter-btn" data-category="Cars" onclick="filterProducts('Cars', event)">Cars</button>
+    <button class="filter-btn" data-category="Real Estate" onclick="filterProducts('Real Estate', event)">Real Estate</button>
+</div>
+    <section class="container mt-5">
+        <h2 class="section-title">Latest Listings</h2>
+        <div id="product-grid"></div>
+    </section>
+    <!-- გასწორებული About Us სექცია -->
+   <section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Zoober: The New Standard</h2>
+        <p>Welcome to <strong>Zoober</strong>, where premium quality meets effortless shopping. 
+                Founded in 2026, we've built a bridge between high-end products and people who 
+                value excellence.</p>
+      <p>
+        💎 <strong>Redefining Luxury</strong><br>
+        We are changing how you discover premium products. No clutter, no compromises—just the best of the best, handpicked for you.
+      </p>
+
+      <p>
+        🚀 <strong>Speed & Precision</strong><br>
+        From the latest tech innovations to classic engineering, our platform is built for those who value time and quality above all else.
+      </p>
+
+      <p>
+        🔒 <strong>Trusted Security</strong><br>
+        We treat every transaction as a partnership. With our verified network, you can explore, trade, and acquire with absolute confidence.
+      </p>
+    </div>
+
+    <div class="about-images">
+      <div class="about-img"><img src="images/officeimage.avif" alt="office" /></div>
+      <div class="about-img"><img src="images/premiumiphone.avif" alt="iphone" /></div>
+      <div class="about-img"><img src="images/bugatti.avif" alt="bugatti" /></div>
+      <div class="about-img"><img src="images/companybuilding.avif" alt="company-building" /></div>
+    </div>
+  </div>
+</section>
+<section class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonials-container">
+        <div class="card">
+            <p>"Zoober made buying my dream car incredibly easy! Highly professional service."</p>
+            <img src="images/george-johnson.avif" alt="georgie">
+            <h5>— George Johnson.</h5>
+        </div>
+        <div class="card">
+            <p>"The selection of kitchen appliances is top-tier. Everything I bought looks and works like a dream."</p>
+            <img src="images/maria-mendelson.avif" alt="maria">
+            <h5>— Maria Mendelson.</h5>
+        </div>
+        <div class="card">
+            <p>"Outstanding selection of luxury real estate. Truly a premium experience."</p>
+            <img src="images/peter-walker.avif" alt="peter">
+            <h5>— Peter Walker.</h5>
+        </div>
+        <div class="card">
+            <p>"The tech I ordered arrived in perfect condition. Will definitely buy again"</p>
+            <img src="images/lukewillson.avif" alt="peter">
+            <h5>— Luke Willson.</h5>
+        </div>
+        <div class="card">
+            <p>"Zoober is my go-to place for premium tech. Fast shipping and impeccable product quality."</p>
+            <img src="images/littlegeorge.webp" alt="littlegeorge">
+            <h5>— Little George.</h5>
+        </div>
+        <div class="card">
+            <p>"I was skeptical about buying a car online, but the process was transparent and safe. Excellent!"</p>
+            <img src="images/elonmoose.jpg" alt="elonmoose">
+            <h5>— Elon Moose.</h5>
+        </div>
+    </div>
+</section>
+<section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <button class="faq-question">How long does shipping take? <span>+</span></button>
+        <div class="faq-answer"><p>We offer express shipping worldwide. Typically, it takes 3-5 business days for delivery.</p></div>
+    </div>
+    
+    <div class="faq-item">
+        <button class="faq-question">Can I track my order? <span>+</span></button>
+        <div class="faq-answer"><p>Yes! Once your order ships, you will receive an email with a tracking number.</p></div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">What is your return policy? <span>+</span></button>
+        <div class="faq-answer"><p>We offer a 30-day money-back guarantee. If you are not satisfied, just contact our support.</p></div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Are the products authentic? <span>+</span></button>
+        <div class="faq-answer"><p>Absolutely. We source all our luxury goods directly from authorized manufacturers.</p></div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Do you offer installation for Real Estate? <span>+</span></button>
+        <div class="faq-answer"><p>For our Real Estate clients, we provide a full consultation and concierge service to ensure a smooth transition.</p></div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Which payment methods do you accept? <span>+</span></button>
+        <div class="faq-answer"><p>We accept all major credit cards, bank transfers, and secure digital payment methods like Apple Pay and Crypto.</p></div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question">"Is it possible to purchase real estate or a vehicle remotely?" <span>+</span></button>
+        <div class="faq-answer"><p>"The Zoober platform is designed to streamline the process; however, it does not facilitate an instant purchase. By using our digital tools, you are submitting a formal request for your selected product. Once this request is registered, you are required to visit our office in Tbilisi within 3 working days to finalize the transaction. During this visit, we will conduct a detailed review of all documentation, reach a formal agreement, and complete the signing of the contract. Our team ensures the process remains transparent, secure, and compliant with all legal requirements."</p></div>
+    </div>
+</section>
+    <!-- ფუტერი უნდა იყოს MAIN თეგის გარეთ, სულ ბოლოში -->
+   </main>
+   
+    <footer class="footer">
+        <section class="partners-section">
+    <h2>Our Trusted Partners</h2>
+    <div class="partners-grid">
+        <div class="partner-item">
+            <img src="images/mercedeslogo.png" alt="Mercedes">
+        </div>
+        <div class="partner-item">
+            <img src="images/nvidia.png" alt="Nvidia">
+        </div>
+        <div class="partner-item">
+            <img src="images/samsung.png" alt="Samsung">
+        </div>
+        <div class="partner-item">
+            <img src="images/apple.png" alt="Iphone">
+        </div>
+    </div>
+</section>
+        <p>&copy; 2026 Zoober. All rights reserved.</p>
+    </footer>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="script.js"></script>
+</body>
+</html>
