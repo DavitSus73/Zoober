@@ -67,7 +67,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* მენიუს პოზიციონირება დესკტოპზე */
+
 .nav-links ul {
     display: flex;
     list-style: none;
@@ -753,7 +753,24 @@ h2 {
 .submit-btn:hover {
     background: var(--secondary-hover);
 }
+@keyframes slideLeft {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 
 .footer{
     margin: 0 auto;
@@ -762,27 +779,4 @@ h2 {
     padding: 2rem;
     background: var(--primary-color);
     color: white;
-}
-@keyframes slideLeft {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* 2. ნაზი შემოსვლა (Fade-in-up) - იდეალურია პროდუქტების და ქარდებისთვის */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* 3. პულსაცია (ღილაკებისთვის ან ყურადღების მისაქცევად) */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* 4. შემოსვლა გვერდიდან (გმირის სექციისთვის ან დიდი ტექსტებისთვის) */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
