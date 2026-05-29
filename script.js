@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!productGrid) return;
         productGrid.innerHTML = ''; 
         productsToDisplay.forEach(product => {
-            const productCard = `
+            productGrid.innerHTML += `
                 <div class="product-card">
                     <div class="product-image">
                         <img src="${product.image}" alt="${product.name}">
@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
-            productGrid.innerHTML += productCard;
         });
     };
 
@@ -220,40 +219,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!cartItemsList) return;
         
         cartItemsList.innerHTML = '';
-        let total = 0;
-        let totalItemsQuantity = 0;
+        let total = 0, totalItemsQuantity = 0;
 
         cart.forEach((item, index) => {
             total += item.price * item.quantity;
             totalItemsQuantity += item.quantity;
-            const li = document.createElement('li');
-            li.classList.add('cart-item-row');
-            li.innerHTML = `
-                <div><span style="font-weight: bold;">${item.name}</span><span style="color: #888; margin-left: 10px;">x${item.quantity}</span></div>
-                <div><span style="margin-right: 10px;">$${(item.price * item.quantity).toLocaleString()}</span><button onclick="window.removeFromCart(${index})" class="remove-item">&times;</button></div>
-            `;
-            cartItemsList.appendChild(li);
+            cartItemsList.innerHTML += `
+                <li class="cart-item-row">
+                    <div><b>${item.name}</b> x${item.quantity}</div>
+                    <div>$${(item.price * item.quantity).toLocaleString()} <button onclick="window.removeFromCart(${index})">&times;</button></div>
+                </li>`;
         });
         cartCount.innerText = totalItemsQuantity;
         totalPriceElement.innerText = `Total: $${total.toLocaleString()}`;
     }
 
-    if (cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.remove('hidden-cart'));
-    if (closeBtn) closeBtn.addEventListener('click', () => cartModal.classList.add('hidden-cart'));
+    if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const val = searchInput.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(val) || p.category.toLowerCase().includes(val));
+            displayProducts(filtered);
+            if (productGrid) productGrid.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 
     window.filterProducts = (category) => {
         const filtered = category === 'All' ? products : products.filter(p => p.category === category);
         displayProducts(filtered);
     };
 
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            displayProducts(products.filter(p => p.name.toLowerCase().includes(val) || p.category.toLowerCase().includes(val)));
-        });
-    }
 
-    document.querySelectorAll('.faq-question').forEach(button => {
+        document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
             button.classList.toggle('active');
             const answer = button.nextElementSibling;
@@ -261,5 +258,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    if (cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.remove('hidden-cart'));
+    if (closeBtn) closeBtn.addEventListener('click', () => cartModal.classList.add('hidden-cart'));
+
     displayProducts();
-});ს
+});
