@@ -1,12 +1,11 @@
-
 const cartBtn = document.querySelector('.cart-btn');
 const cartModal = document.getElementById('cart-modal');
 const closeBtn = document.getElementById('close-cart');
 const productGrid = document.getElementById('product-grid');
 
 
-const burger = document.querySelector('#burger-menu');
-const navLinks = document.querySelector('#nav-links');
+const burger = document.querySelector('.burger-menu');
+const navLinks = document.querySelector('.nav-links');
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
