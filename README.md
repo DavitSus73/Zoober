@@ -1,1 +1,1 @@
-# Zoober https://davitsus73.github.io/Zoober/
+# Zoober - https://davitsus73.github.io/Zoober/
