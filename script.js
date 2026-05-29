@@ -1,27 +1,21 @@
-const cartBtn = document.querySelector('.cart-btn');
-const cartModal = document.getElementById('cart-modal');
-const closeBtn = document.getElementById('close-cart');
-const productGrid = document.getElementById('product-grid');
-
-
-const burger = document.querySelector('.burger-menu');
-const navLinks = document.querySelector('.nav-links');
-
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('open');
-});
 document.addEventListener('DOMContentLoaded', () => {
-    const burger = document.querySelector('.burger-menu');
-    const navLinks = document.querySelector('.nav-links');
+    const cartBtn = document.querySelector('.cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const closeBtn = document.getElementById('close-cart');
+    const productGrid = document.getElementById('product-grid');
+    const burger = document.querySelector('#burger-menu');
+    const navLinks = document.querySelector('#nav-links');
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.querySelector('.search-bar button');
 
     if (burger && navLinks) {
         burger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            burger.classList.toggle('open');
         });
     }
-});
-const products = [
+
+    const products = [
     // --- Accessories ---
     { id: 1, name: "Passport Holder", price: 50, category: "Accessories", image: "images/passport-holder.avif" },
     { id: 2, name: "Silk Tie", price: 85, category: "Accessories", image: "images/tie.avif" },
@@ -182,200 +176,90 @@ const products = [
     { id: 135, name: "Modern Villa", price: 1200000, category: "Real Estate", image: "images/modernvilla.jpg" },
     { id: 136, name: "Penthouse", price: 2500000, category: "Real Estate", image: "images/penthouse.webp" }
 ];
-let cart = [];
+    let cart = [];
 
-
-function displayProducts(productsToDisplay = products) {
-    productGrid.innerHTML = ''; 
-    productsToDisplay.forEach(product => {
-        const productCard = `
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                    <span class="category-tag">${product.category}</span>
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p class="price">$${product.price.toLocaleString()}</p>
-                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        `;
-        productGrid.innerHTML += productCard;
-    });
-}
-displayProducts(products);
-
-
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingProduct = cart.find(item => item.id === productId);
-
-    if (existingProduct) {
-        
-        existingProduct.quantity += 1;
-    } else {
-        
-        cart.push({ ...product, quantity: 1 });
-    }
-    
-    updateCartUI();
-}
-
-
-function updateCartUI() {
-    const cartItemsList = document.getElementById('cart-items-list');
-    const cartCount = document.querySelector('.cart-count');
-    const totalPriceElement = document.querySelector('.total-price');
-    
-    cartItemsList.innerHTML = '';
-    let total = 0;
-    let totalItemsQuantity = 0;
-
-    cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-        totalItemsQuantity += item.quantity;
-        
-        const li = document.createElement('li');
-        li.classList.add('cart-item-row');
-        
-        li.innerHTML = `
-            <div>
-                <span style="font-weight: bold;">${item.name}</span>
-                <span style="color: #888; margin-left: 10px;">x${item.quantity}</span>
-            </div>
-            <div>
-                <span style="margin-right: 10px;">$${(item.price * item.quantity).toLocaleString()}</span>
-                <button onclick="removeFromCart(${index})" class="remove-item">&times;</button>
-            </div>
-        `;
-        cartItemsList.appendChild(li);
-    });
-
-    cartCount.innerText = totalItemsQuantity;
-    totalPriceElement.innerText = `Total: $${total.toLocaleString()}`;
-}
-
-
-function removeFromCart(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-    } else {
-        cart.splice(index, 1);
-    }
-    updateCartUI();
-}
-
-
-cartBtn.addEventListener('click', () => {
-    cartModal.classList.remove('hidden-cart');
-});
-
-closeBtn.addEventListener('click', () => {
-    cartModal.classList.add('hidden-cart');
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target === cartModal) {
-        cartModal.classList.add('hidden-cart');
-    }
-});
-
-
-function filterProducts(category) {
-    
-    const buttons = document.querySelectorAll('.filter-btn');
-    
-    
-    const clickedBtn = Array.from(buttons).find(btn => btn.innerText === category);
-    
-    if (!clickedBtn) return; 
-
-    const isAlreadyActive = clickedBtn.classList.contains('active');
-
-    
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    if (isAlreadyActive) {
-        
+    window.displayProducts = (productsToDisplay = products) => {
+        if (!productGrid) return;
         productGrid.innerHTML = ''; 
-        localStorage.removeItem('selectedCategory');
-    } else {
-        
-        clickedBtn.classList.add('active');
-        localStorage.setItem('selectedCategory', category);
-        
-        const filteredProducts = category === 'All' 
-            ? products 
-            : products.filter(p => p.category === category);
-        
-        displayProducts(filteredProducts);
-    }
-}
-const searchInput = document.getElementById('search-input');
-
-
-searchInput.addEventListener('input', (e) => {
-    const searchValue = e.target.value.toLowerCase(); 
-
-   
-    const filteredResults = products.filter(product => {
-        return product.name.toLowerCase().includes(searchValue) || 
-               product.category.toLowerCase().includes(searchValue);
-    });
-
-    
-    displayProducts(filteredResults);
-});
-function searchProducts() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const offset = 180; 
-
-    if (query.includes('about')) {
-        const element = document.getElementById('about');
-        if (element) {
-            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-            window.scrollTo({
-                top: elementPosition - offset,
-                behavior: 'smooth'
-            });
-        }
-    } else {
-        const productGrid = document.getElementById('product-grid');
-        if (productGrid) {
-            const elementPosition = productGrid.getBoundingClientRect().top + window.pageYOffset;
-            window.scrollTo({
-                top: elementPosition - offset,
-                behavior: 'smooth'
-            });
-        }
-    }
-}
-
-
-document.querySelector('.search-bar button').addEventListener('click', searchProducts);
-document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        
-        
-        document.querySelectorAll('.faq-answer').forEach(el => {
-            if (el !== answer) {
-                el.style.maxHeight = null;
-                el.previousElementSibling.classList.remove('active');
-            }
+        productsToDisplay.forEach(product => {
+            const productCard = `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                        <span class="category-tag">${product.category}</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">$${product.price.toLocaleString()}</p>
+                        <button class="add-to-cart-btn" onclick="window.addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+            productGrid.innerHTML += productCard;
         });
+    };
 
+    window.addToCart = (productId) => {
+        const product = products.find(p => p.id === productId);
+        const existingProduct = cart.find(item => item.id === productId);
+        if (existingProduct) existingProduct.quantity += 1;
+        else cart.push({ ...product, quantity: 1 });
+        updateCartUI();
+    };
+
+    window.removeFromCart = (index) => {
+        if (cart[index].quantity > 1) cart[index].quantity -= 1;
+        else cart.splice(index, 1);
+        updateCartUI();
+    };
+
+    function updateCartUI() {
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartCount = document.querySelector('.cart-count');
+        const totalPriceElement = document.querySelector('.total-price');
+        if (!cartItemsList) return;
         
-        button.classList.toggle('active');
-        if (button.classList.contains('active')) {
-            answer.style.maxHeight = answer.scrollHeight + "px";
-        } else {
-            answer.style.maxHeight = null;
-        }
+        cartItemsList.innerHTML = '';
+        let total = 0;
+        let totalItemsQuantity = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            totalItemsQuantity += item.quantity;
+            const li = document.createElement('li');
+            li.classList.add('cart-item-row');
+            li.innerHTML = `
+                <div><span style="font-weight: bold;">${item.name}</span><span style="color: #888; margin-left: 10px;">x${item.quantity}</span></div>
+                <div><span style="margin-right: 10px;">$${(item.price * item.quantity).toLocaleString()}</span><button onclick="window.removeFromCart(${index})" class="remove-item">&times;</button></div>
+            `;
+            cartItemsList.appendChild(li);
+        });
+        cartCount.innerText = totalItemsQuantity;
+        totalPriceElement.innerText = `Total: $${total.toLocaleString()}`;
+    }
+
+    if (cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.remove('hidden-cart'));
+    if (closeBtn) closeBtn.addEventListener('click', () => cartModal.classList.add('hidden-cart'));
+
+    window.filterProducts = (category) => {
+        const filtered = category === 'All' ? products : products.filter(p => p.category === category);
+        displayProducts(filtered);
+    };
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            displayProducts(products.filter(p => p.name.toLowerCase().includes(val) || p.category.toLowerCase().includes(val)));
+        });
+    }
+
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('active');
+            const answer = button.nextElementSibling;
+            answer.style.maxHeight = button.classList.contains('active') ? answer.scrollHeight + "px" : null;
+        });
     });
-});
 
-
+    displayProducts();
+});ს
