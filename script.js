@@ -227,7 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsList.innerHTML += `
                 <li class="cart-item-row">
                     <div><b>${item.name}</b> x${item.quantity}</div>
-                    <div>$${(item.price * item.quantity).toLocaleString()} <button onclick="window.removeFromCart(${index})">&times;</button></div>
+                    <div>$${(item.price * item.quantity).toLocaleString()} 
+                        <button onclick="window.removeFromCart(${index})" class="remove-item">&times;</button>
+                    </div>
                 </li>`;
         });
         cartCount.innerText = totalItemsQuantity;
