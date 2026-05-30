@@ -169,17 +169,15 @@ body {
     border-color: var(--primary-color); 
 }
 .remove-item {
-    font-size: 2.2rem;
-    color: #888;
-    line-height: 1;
-    background: transparent !important; 
-    border: none !important;            
+    font-size: 2.2rem;    
+    color: #888;           
+    line-height: 1;        
+    background: transparent; 
+    border: none;           
     cursor: pointer;
-    padding: 0 5px !important;         
-    transition: color 0.3s ease;
 }
 .remove-item:Hover{
-    color: #e74c3c !important;
+    color: #e74c3c;
 }
 .total-price{
     font-size: 2.4rem;
